@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рецепты - Вкусные идеи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #9ACD32;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        section {
+            padding: 20px;
+        }
+        .recipe {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .search {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Список Рецептов</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Главная</a></li>
+                <li><a href="{% url 'recipes' %}">Рецепты</a></li>
+                <input type="text" class="search" id="searchInput" placeholder="Поиск...">
+                {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}">Личный кабинет</a>
+                {% else %}
+                <a href="{% url 'login' %}">Вход/регистрация</a>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <div id="recipeList">
+            {% for recipe in recipes %}
+                <div class="recipe">
+                    <h2>{{recipe.title}}</h2>
+                    <p>Ингредиенты: {{recipe.ingredients}}</p>
+                    <p>Описание: {{recipe.description}}</p>
+                    <a href="">Подробнее</a>
+                </div>
+            {% endfor %}
+            <!-- Здесь будут динамически добавленные рецепты из базы данных -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Вкусные идеи. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const recipeCards = document.querySelectorAll('.recipe');
+
+        searchInput.addEventListener('keyup', filterRecipes);
+
+        function filterRecipes() {
+            const filter = searchInput.value.toLowerCase();
+            recipeCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                card.style.display = title.includes(filter) ? "block" : "none";
+            });
+        }
+    </script>
+</body>
+</html>

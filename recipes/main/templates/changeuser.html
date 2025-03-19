@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение данных</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #9ACD32;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        .search {
+            margin-left: 20px;
+        }
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .recipe-card {
+            min-width: 230px;
+            margin-right: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+<header>
+        <h1>Вкусные идеи</h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'make_recipe' %}">Добавить рецепт</a> </li>
+                {% endif %}
+                <li><a href="{% url 'index' %}">Главная</a></li>
+                <li><a href="{% url 'recipes' %}">Рецепты</a></li>
+            </ul>
+            <input type="text" class="search" id="searchInput" placeholder="Поиск...">
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Личный кабинет</a>
+            {% else %}
+            <a href="{% url 'login' %}">Вход/регистрация</a>
+            {% endif %}
+        </nav>
+    </header>
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {{form}}
+    <input type="submit" value="Применить изменения">
+</form>
+</body>
+</html>
