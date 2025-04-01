@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное - Рецепты Онлайн</title>
+</head>
+<body>
+    <header>
+        <h1>Избранные Рецепты</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Главная</a></li>
+                <li><a href="{% url 'register' %}">Регистрация</a></li>
+                <li><a href="{% url 'login' %}">Авторизация</a></li>
+                <li><a href="{% url 'recipes' %}">Рецепты</a></li>
+                <li><a href="{% url 'favorites' %}">Избранное</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <button>Посмотреть избранное</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Рецепты Онлайн. Все права защищены.</p>
+    </footer>
+</body>
+</html>

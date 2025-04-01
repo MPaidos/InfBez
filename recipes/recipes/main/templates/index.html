@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная - Вкусные идеи</title>
+    <style>
+        :root {
+            --primary-color: #9ACD32;
+            --primary-dark: #7CB342;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: var(--primary-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        header h1 {
+            color: var(--white);
+            font-size: 1.8rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 15px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .search {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            min-width: 200px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(154, 205, 50, 0.1) 0%, rgba(255, 255, 255, 0.3) 100%);
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            padding-bottom: 20px;
+        }
+
+        .recipe-card {
+            min-width: 280px;
+            margin-right: 20px;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .recipe-image {
+            height: 180px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .recipe-content {
+            padding: 20px;
+        }
+
+        .recipe-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .carousel-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            background-color: var(--white);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            nav {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Вкусные идеи</h1>
+        <nav>
+            <ul>
+               {% if user.is_authenticated %}
+               <li><a href="{% url 'make_recipe' %}">Добавить рецепт</a></li>
+               {% else %}
+               <li><a href="{% url 'recipe_auth_required' %}">Добавить рецепт</a></li>
+               {% endif %}
+                <li><a href="{% url 'index' %}">Главная</a></li>
+                <li><a href="{% url 'recipes' %}">Рецепты</a></li>
+            </ul>
+            <input type="text" class="search" id="searchInput" placeholder="Поиск...">
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Личный кабинет</a>
+            {% else %}
+            <a href="{% url 'login' %}">Вход/регистрация</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h2>Откройте для себя мир вкусов</h2>
+            <p>Ищите рецепты, сохраняйте свои любимые и делитесь оценками с другими пользователями!</p>
+            {% if user.is_authenticated %}
+            <a href="{% url 'make_recipe' %}" class="btn">Добавить рецепт</a>
+            {% else %}
+            <a href="{% url 'register' %}" class="btn">Присоединиться</a>
+            {% endif %}
+        </section>
+
+        <section id="popular-recipes">
+            <h2 class="section-title">Популярные рецепты</h2>
+            <div class="carousel">
+                <div class="carousel-container" id="carouselContainer">
+                    <div class="recipe-card" data-title="Рецепт 1">
+                        <div class="recipe-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                        <div class="recipe-content">
+                            <h3>Рецепт 1</h3>
+                            <p>Вкусное и простое блюдо, которое понравится всей семье</p>
+                            <div class="recipe-meta">
+                                <span>⭐ 4.5</span>
+                                <span>30 мин</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card" data-title="Рецепт 2">
+                        <div class="recipe-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                        <div class="recipe-content">
+                            <h3>Рецепт 2</h3>
+                            <p>Идеальный вариант для праздничного стола</p>
+                            <div class="recipe-meta">
+                                <span>⭐ 4.8</span>
+                                <span>45 мин</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card" data-title="Рецепт 3">
+                        <div class="recipe-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                        <div class="recipe-content">
+                            <h3>Рецепт 3</h3>
+                            <p>Легкий и полезный завтрак для хорошего дня</p>
+                            <div class="recipe-meta">
+                                <span>⭐ 4.2</span>
+                                <span>15 мин</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card" data-title="Рецепт 4">
+                        <div class="recipe-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                        <div class="recipe-content">
+                            <h3>Рецепт 4</h3>
+                            <p>Ароматный ужин за 30 минут</p>
+                            <div class="recipe-meta">
+                                <span>⭐ 4.6</span>
+                                <span>30 мин</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recipe-card" data-title="Рецепт 5">
+                        <div class="recipe-image" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                        <div class="recipe-content">
+                            <h3>Рецепт 5</h3>
+                            <p>Десерт, который покорит ваших гостей</p>
+                            <div class="recipe-meta">
+                                <span>⭐ 4.9</span>
+                                <span>60 мин</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <button class="carousel-btn" id="prevButton">←</button>
+                    <button class="carousel-btn" id="nextButton">→</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Вкусные идеи. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const recipeCards = document.querySelectorAll('.recipe-card');
+        const carousel = document.querySelector('.carousel-container');
+        const prevBtn = document.getElementById('prevButton');
+        const nextBtn = document.getElementById('nextButton');
+        let index = 0;
+        const cardWidth = 300; // Ширина карточки + margin
+
+        searchInput.addEventListener('keyup', filterRecipes);
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        function filterRecipes() {
+            const filter = searchInput.value.toLowerCase();
+            recipeCards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                card.style.display = title.includes(filter) ? "block" : "none";
+            });
+        }
+
+        function prevSlide() {
+            index = Math.max(index - 1, 0);
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            index = Math.min(index + 1, recipeCards.length - 1);
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${index * cardWidth}px)`;
+        }
+    </script>
+</body>
+</html>
